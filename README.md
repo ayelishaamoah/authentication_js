@@ -8,10 +8,21 @@ Jasmine
 MongoDB
 
 ### Getting started
+```js
+$ git clone 'https://github.com/ayelishaamoah/makersbnb_js.git'
+$ npm install //install packages listed in package.json
+$ npm run server //this will run the 'server' script in package.json
+```
 
 ### Running Tests
 Jasmine
-Cypress
+
+Open ```SpecRunner.html``` in the browser
+
+Running end to end tests using cyprus
+``` 
+$ npm run cypress:open 
+```
 
 ### MakersBnB specification
 We would like a web application that allows users to list spaces they have available, and to hire spaces for the night.
@@ -42,6 +53,7 @@ We would like a web application that allows users to list spaces they have avail
 * A ‘chat’ functionality once a space has been booked, allowing users whose space-booking request has been confirmed to chat with the user that owns that space
 * Basic payment implementation though Stripe.
 
+#### User Stories
 ```
 As a user
 So that I can list a new space
