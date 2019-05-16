@@ -1,61 +1,50 @@
+// load in evironment variables
+require('dotenv').config()
+
 const express = require('express');
-const app = express();
-const port = 3000;
-const mongo = require('mongodb');
-const assert = require('assert');
-const path = require('path');
-const bodyParser = require('body-parser');
+const expressLayouts = require('express-ejs-layouts');
+const mongoose = require('mongoose');
+const passport = require('passport');
 const session = require('express-session');
-const MongoClient = require('mongodb').MongoClient
 
-// Running mongodb on local machine
-const url = 'mongodb://localhost:27017/test';
+const app = express();
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(session({secret: 'secrettttt'}));
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+// DB Config
+const db = process.env.MONGO_DB_URL
 
-app.get('/', (req, res) => res.sendFile(path.join(__dirname + '/public/homepage.html')));
+// Connect to MongoDB
+mongoose.connect(db, { useNewUrlParser: true })
+  .then(() => console.log('MongoDB Connected'))
+  .catch(err => console.log(err));
 
-app.post('/users/new', (req, res) => {
-  const user = {
-    email: req.body.email,
-    password: req.body.password
-  };
-// connect to the database and callback on response - error or database connection
-  MongoClient.connect(url,  { useNewUrlParser: true }, (err, client) => {
-    // checks if we have an error
-    assert.equal(null, err);
-    var db = client.db('test')
-    // specify which collection I want to insert data into and insert one entry
-    db.collection('user-data').insertOne(user, (err, client) => {
-      assert.equal(null, err);
-      console.log('Inserted item');
+// set static folder
+app.use(express.static(__dirname + '/public'));
+// ejs setup
+app.use(expressLayouts);
+app.set('view engine', 'ejs');
 
-    });
-  });
+// Express body parser
+app.use(express.urlencoded({ extended: true }));
 
-  res.redirect('/listings')
-});
+// Express session
+app.use(session({
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true
+  })
+);
 
-app.get('/listings', (req, res) => {
-// asynchronous block
- const resultArray = [];
-  MongoClient.connect(url,  { useNewUrlParser: true }, (err, client) => {
-    assert.equal(null, err);
-    var db = client.db('test')
-    const cursor = db.collection('user-data').find();
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
 
-    cursor.forEach((doc, err) => {
-      assert.equal(null, err)
-      resultArray.push(doc);
-    }, () => {
-      resultArray.forEach((element) => {
-        console.log("id " + element['_id'])
-        console.log("email " + element['email'])
-      });
-      res.send(`Welcome ${resultArray}`)
-    });
-  });
- });
+
+// // Routes
+app.use('/', require('./routes/index.js'));
+app.use('/users', require('./routes/users.js'));
+app.use('/listings', require('./routes/listings.js'));
+
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, console.log(`Server started on port ${PORT}`));
