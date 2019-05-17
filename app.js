@@ -6,6 +6,7 @@ const expressLayouts = require('express-ejs-layouts');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const session = require('express-session');
+const path = require('path');
 
 const app = express();
 
@@ -19,7 +20,7 @@ mongoose.connect(db, { useNewUrlParser: true })
   .catch(err => console.log(err));
 
 // set static folder
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(path.join(__dirname, '/public')));
 // ejs setup
 app.use(expressLayouts);
 app.set('view engine', 'ejs');
