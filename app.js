@@ -21,6 +21,7 @@ mongoose.connect(db, { useNewUrlParser: true })
 
 // set static folder
 app.use(express.static(path.join(__dirname, '/public')));
+
 // ejs setup
 app.use(expressLayouts);
 app.set('view engine', 'ejs');
