@@ -1,12 +1,15 @@
 <div class="form-container">
-<Legend>Log in</Legend>
+  <% if (signupMessage != "") { %>
+    <p class="alert-message success"> <%=signupMessage %></p>
+  <% } %>
+<Legend><h2 class="centered-heading ">Log in</h2></Legend>
 <form action="/users/login" method="post">
   <fieldset>
       <label for="email">Email Address</label>
-      <input type="email"  class="form-field" name="email" placeholder="Enter Email"><br>
-      <label for="password" placeholder="Enter Password">Password</label>
-      <input type="password" class="form-field"  name="password"><br>
-    <button type="submit" class="btn-primary">Login</button>
+      <input type="email" class="form-field" name="email" placeholder="Enter Email"><br>
+      <label for="password">Password</label>
+      <input type="password" class="form-field" name="password" placeholder="Enter Password"><br>
+    <button id="login-btn" type="submit" class="btn-primary">Login</button>
   </fieldset>
 </form>
 </div>

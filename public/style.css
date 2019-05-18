@@ -1,8 +1,14 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
 body {
   background-image: url('/images/landing-page.jpg');
   background-color: #ffffff;
   background-size: cover;
-  height: 100%;
+  min-height: 100%;
   margin: 0;
   font-family: 'Roboto', sans-serif;
 }
@@ -13,6 +19,7 @@ h1, h2, h3, h4, h5, h6 {
 
 fieldset {
   border: none;
+  padding: 0;
 }
 
 label {
@@ -24,9 +31,10 @@ label {
 .centered-heading {
   font-weight: bold;
   text-align: center;
+  margin-bottom: 24px;
 }
 .navbar {
-
+  padding: 18px 5px;
 }
 
 .navbar-list {
@@ -55,7 +63,7 @@ label {
   max-width: 450px;
   background-color: #ffffff;
   border-radius: 9px;
-  padding: 32px 32px 24px 32px;
+  padding: 36px 32px 24px 32px;
   margin: 0 auto;
 }
 
@@ -64,7 +72,7 @@ label {
   border-radius: 6px;
   color: #393D3F;
   font-size: 17px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   padding: 9px;
   width: 100%;
 }
@@ -84,4 +92,28 @@ label {
 
 .btn-primary:hover{
   background-color: #D84A05;
+}
+
+.error-message-list {
+  padding-top: 24px;
+}
+
+.alert-message {
+  border-radius: 5px;
+  display: inline-block;
+  margin-bottom: 8px;
+  padding: 0.25em 0.55em;
+  width: 100%;
+}
+
+.warning {
+  color: #856404;
+  background-color: #fff3cda1;
+  border: 1px solid #ffeeba;
+}
+
+.success {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
 }
