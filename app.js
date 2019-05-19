@@ -12,6 +12,7 @@ const flash = require('express-flash');
 const app = express();
 
 
+require('./config/passport')(passport);
 // DB Config
 const db = process.env.MONGO_DB_URL
 

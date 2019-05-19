@@ -5,11 +5,6 @@ const passport = require('passport');
 const User = require('../models/user.js')
 const { check, validationResult } = require('express-validator/check');
 
-//login page
-router.get('/login', (req,res) =>
-  res.render('login')
-);
-
 router.post('/register', [
   check('first_name').not().isEmpty().withMessage("Please enter First Name"),
   check('last_name').not().isEmpty().withMessage("Please enter Last Name"),
@@ -62,6 +57,23 @@ router.post('/register', [
       });
     });
   }
+});
+
+//login page
+router.get('/login', (req,res) => {
+  res.render('login')
+});
+
+// login
+router.post('/login',
+  passport.authenticate('local', {
+  successRedirect: '/users/listings',
+  failureRedirect: '/login',
+  failureFlash: true })
+);
+
+router.get('/listings', (req,res) => {
+  res.render('listings')
 });
 
 module.exports = router;
