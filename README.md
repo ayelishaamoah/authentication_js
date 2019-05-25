@@ -5,10 +5,10 @@ The purpose of this project is to explore concepts covered throughout the course
 I would like to gain more exposure to JavaScript as this is a language I forsee myself using during my career as a software engineer. The goal of Week 6 was focused on being able to build a project according to a specification which meant breaking down the project into user tasks.
 
 ### Personal objectives
--[ ] Get a node project up and running
--[ ] Implement user authentication
--[ ] Understand end to end testing for a JavaScript app
--[ ] Gain experience using a No SQL database
+* Get a node project up and running
+* Implement user authentication
+* Understand end to end testing for a JavaScript app
+* Gain experience using a No SQL database
 
 ### Tech Stack
 JavaScript
